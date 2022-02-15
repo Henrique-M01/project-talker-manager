@@ -2,6 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const registeredPeople = require('./Middlewares/registeredPeople');
 const getPeopleForID = require('./Middlewares/getPeopleForID');
+const generateToken = require('./Middlewares/generateToken');
+const { passwordExist, passwordLength } = require('./Middlewares/isValidPassword');
+const { emailExist, validEmail } = require('./Middlewares/isValidEmail');
 
 const app = express();
 app.use(bodyParser.json());
@@ -13,6 +16,8 @@ const PORT = '3000';
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
+
+app.post('/login', emailExist, validEmail, passwordExist, passwordLength, generateToken);
 
 app.get('/talker/:id', getPeopleForID);
 
