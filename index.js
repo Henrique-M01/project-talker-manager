@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const registeredPeople = require('./Middlewares/registeredPeople');
+const getPeopleForID = require('./Middlewares/getPeopleForID');
 
 const app = express();
 app.use(bodyParser.json());
@@ -12,6 +13,8 @@ const PORT = '3000';
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
+
+app.get('/talker/:id', getPeopleForID);
 
 app.get('/talker', registeredPeople);
 
