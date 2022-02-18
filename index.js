@@ -14,6 +14,7 @@ const { talkExist,
         validRate,
         dateExist,
       } = require('./Middlewares/validateDateAndRate');
+const deleteById = require('./Middlewares/deleteById');
 
 const app = express();
 app.use(bodyParser.json());
@@ -34,6 +35,8 @@ app.post('/talker', tokenExist, validToken, nameExist, nameLength,
 app.get('/talker/:id', getPeopleForID);
 
 app.get('/talker', registeredPeople);
+
+app.delete('/talker/:id', tokenExist, validToken, deleteById);
 
 app.listen(PORT, () => {
   console.log('Online');
