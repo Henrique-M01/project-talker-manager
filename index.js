@@ -9,7 +9,11 @@ const createPerson = require('./Middlewares/createPerson');
 const { validToken, tokenExist } = require('./Middlewares/validateToken');
 const { nameExist, nameLength } = require('./Middlewares/validateName');
 const { ageExist, verifiAge } = require('./Middlewares/validateAge');
-const { talkExist, verifiDate, validRate, dateExist } = require('./Middlewares/validateDateAndRate');
+const { talkExist,
+        verifiDate,
+        validRate,
+        dateExist,
+      } = require('./Middlewares/validateDateAndRate');
 
 const app = express();
 app.use(bodyParser.json());
