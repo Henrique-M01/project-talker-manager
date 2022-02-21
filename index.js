@@ -15,6 +15,7 @@ const { talkExist,
         dateExist,
       } = require('./Middlewares/validateDateAndRate');
 const deleteById = require('./Middlewares/deleteById');
+const { editTalker } = require('./Middlewares/editTalker');
 
 const app = express();
 app.use(bodyParser.json());
@@ -27,15 +28,18 @@ app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
 
+app.put('/talker/:id', tokenExist, validToken, nameExist, nameLength,
+  ageExist, verifiAge, talkExist, validRate, dateExist, verifiDate, editTalker);
+
 app.post('/login', emailExist, validEmail, passwordExist, passwordLength, generateToken);
 
 app.post('/talker', tokenExist, validToken, nameExist, nameLength,
   ageExist, verifiAge, talkExist, validRate, dateExist, verifiDate, createPerson);
 
 app.get('/talker/:id', getPeopleForID);
-
+  
 app.get('/talker', registeredPeople);
-
+  
 app.delete('/talker/:id', tokenExist, validToken, deleteById);
 
 app.listen(PORT, () => {
